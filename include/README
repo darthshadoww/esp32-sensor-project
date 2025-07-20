@@ -1,6 +1,6 @@
 # ESP32 Sensor Project
 
-[![PlatformIO Build Status](https://github.com/darthshadoww/esp32-sensor-project/actions/workflows/ci.yml/badge.svg)](https://github.com/darthshadoww/esp32-sensor-project/actions)  
+[![PlatformIO Build Status](https://github.com/darthshadoww/esp32-sensor-project/actions/workflows/ci.yml/badge.svg)](https://github.com/darthshadoww/esp32-sensor-project/actions)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
 **A PlatformIO-based ESP32 project to read sensor data and publish via MQTT, with OTA update support.**
@@ -9,46 +9,47 @@
 
 ## Table of Contents
 
-1. [Features](#features)  
-2. [Prerequisites](#prerequisites)  
-3. [Installation](#installation)  
-4. [Configuration](#configuration)  
-5. [Building & Uploading](#building--uploading)  
-6. [Usage](#usage)  
-7. [Project Structure](#project-structure)  
-8. [Testing](#testing)  
-9. [Contributing](#contributing)  
-10. [License](#license)  
+1. [Features](#features)
+2. [Prerequisites](#prerequisites)
+3. [Installation](#installation)
+4. [Configuration](#configuration)
+5. [Building & Uploading](#building--uploading)
+6. [Usage](#usage)
+7. [Project Structure](#project-structure)
+8. [Testing](#testing)
+9. [Contributing](#contributing)
+10. [License](#license)
 
 ---
 
 ## Features
 
-- 🔋 Reads data from attached sensors (e.g., temperature, humidity)  
-- 🌐 Connects to Wi-Fi and an MQTT broker  
-- 📡 Publishes sensor readings to configurable MQTT topics  
-- 🔄 Supports OTA (Over-The-Air) firmware updates via PlatformIO  
-- 🔧 Simple configuration via `secrets.h`, keeping credentials out of source control  
+* 🔋 Reads data from attached sensors (e.g., temperature, humidity)
+* 🌐 Connects to Wi-Fi and an MQTT broker
+* 📡 Publishes sensor readings to configurable MQTT topics
+* 🔄 Supports OTA (Over-The-Air) firmware updates via PlatformIO
+* 🔧 Simple configuration via `secrets.h`, keeping credentials out of source control
 
 ---
 
 ## Prerequisites
 
-- ESP32 development board  
-- USB cable for power and USB uploads  
-- [PlatformIO Core](https://docs.platformio.org/) installed  
-- An MQTT broker (public or private)  
-- Optional: CLion with PlatformIO plugin or VS Code with PlatformIO extension  
+* ESP32 development board
+* USB cable for power and USB uploads
+* [PlatformIO Core](https://docs.platformio.org/) installed
+* An MQTT broker (public or private)
+* Optional: CLion with PlatformIO plugin or VS Code with PlatformIO extension
 
 ---
 
 ## Installation
 
-1. **Clone the repository**  
+1. **Clone the repository**
+
    ```bash
-   git clone https://github.com/your-usernam/esp32-sensor-project.git
+   git clone https://github.com/darthshadoww/esp32-sensor-project.git
    cd esp32-sensor-project
-````
+   ```
 
 2. **Initialize (if needed)**
 
@@ -88,7 +89,7 @@
    // OTA update
    #define OTA_PASSWORD "ota_update_password"
    ```
-3. Ensure `include/secrets.h` is in `.gitignore` so you don’t accidentally commit it.
+3. Make sure `include/secrets.h` is listed in `.gitignore` to avoid accidental commits.
 
 ---
 
@@ -110,8 +111,8 @@
 
 ## Usage
 
-1. After flashing, the ESP32 connects to your Wi-Fi network.
-2. It then connects to the configured MQTT broker.
+1. After flashing, the ESP32 will connect to your Wi-Fi network.
+2. It will then connect to the configured MQTT broker.
 3. Sensor readings are published periodically to topics such as:
 
    * `sensors/temperature`
@@ -176,5 +177,3 @@ Please follow the existing code style and include tests for new features.
 ## License
 
 This project is licensed under the MIT License. See [LICENSE](LICENSE) for details.
-
-```
