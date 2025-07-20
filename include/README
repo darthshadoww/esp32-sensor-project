@@ -1,7 +1,7 @@
 ````markdown
 # ESP32 Sensor Project
 
-[![PlatformIO Build Status](https://github.com/your-username/esp32-sensor-project/actions/workflows/ci.yml/badge.svg)](https://github.com/your-username/esp32-sensor-project/actions)  
+[![PlatformIO Build Status](https://github.com/darthshadoww/esp32-sensor-project/actions/workflows/ci.yml/badge.svg)](https://github.com/darthshadoww/esp32-sensor-project/actions)  
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
 **A PlatformIO-based ESP32 project to read sensor data and publish via MQTT, with OTA update support.**
@@ -47,7 +47,7 @@
 
 1. **Clone the repository**  
    ```bash
-   git clone https://github.com/your-username/esp32-sensor-project.git
+   git clone https://github.com/your-usernam/esp32-sensor-project.git
    cd esp32-sensor-project
 ````
 
@@ -55,7 +55,7 @@
 
    ```bash
    git init
-   git remote add origin https://github.com/your-username/esp32-sensor-project.git
+   git remote add origin https://github.com/darthshadoww/esp32-sensor-project.git
    git branch -M main
    git add .
    git commit -m "Initial commit"
