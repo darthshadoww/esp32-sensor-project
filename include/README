@@ -1,86 +1,98 @@
 # ESP32 Sensor Project
 
-A PlatformIO/ESP32 project to read sensor data and publish via MQTT, with OTA update support.
+[![PlatformIO Build Status](https://github.com/your-username/esp32-sensor-project/actions/workflows/ci.yml/badge.svg)](https://github.com/your-username/esp32-sensor-project/actions)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+
+**A PlatformIO-based ESP32 project to read sensor data and publish via MQTT, with OTA update support.**
+
+---
+
+## Table of Contents
+
+1. [Features](#features)
+2. [Prerequisites](#prerequisites)
+3. [Installation](#installation)
+4. [Configuration](#configuration)
+5. [Building & Uploading](#building--uploading)
+6. [Usage](#usage)
+7. [Project Structure](#project-structure)
+8. [Testing](#testing)
+9. [Contributing](#contributing)
+10. [License](#license)
+
+---
 
 ## Features
 
-* Reads data from connected sensors (e.g., temperature, humidity).
-* Connects to Wi‑Fi and an MQTT broker.
-* Publishes sensor readings to configurable MQTT topics.
-* Supports OTA (Over‑The‑Air) firmware updates via PlatformIO.
-* Easily configured via a `secrets.h` header, keeping credentials out of source control.
+* 🔋 Reads data from attached sensors (e.g., temperature, humidity).
+* 🌐 Connects to Wi‑Fi and an MQTT broker.
+* 📡 Publishes sensor readings to configurable MQTT topics.
+* 🔄 Supports OTA (Over-The-Air) firmware updates via PlatformIO.
+* 🔧 Simple configuration via `secrets.h`, keeping credentials out of source control.
+
+---
 
 ## Prerequisites
 
 * ESP32 development board
-* USB cable (for power and USB uploads)
+* USB cable for power and USB uploads
 * [PlatformIO Core](https://docs.platformio.org/) installed
-* CLion (with the PlatformIO plugin) or VS Code (optional)
 * An MQTT broker (public or private)
+* Optional: CLion with PlatformIO plugin or VS Code with PlatformIO extension
 
-## Getting Started
+---
 
-### 1. Clone the Repository
+## Installation
 
-```bash
-git clone https://github.com/yourusername/esp32-sensor-project.git
-cd esp32-sensor-project
-```
+1. **Clone the repository**
 
-### 2. (Re)Initialize Git in an Existing CLion Project
+   ```bash
+   git clone https://github.com/your-username/esp32-sensor-project.git
+   cd esp32-sensor-project
+   ```
 
-If you started coding in CLion without a remote repo, run:
+2. **Initialize missing files** (if starting from an existing CLion project)
 
-```bash
-git init
-# Replace URL with your GitHub repo
-git remote add origin https://github.com/yourusername/esp32-sensor-project.git
-git branch -M main
-git add .
-git commit -m "Initial commit"
-git push -u origin main
-```
+   ```bash
+   git init
+   git remote add origin https://github.com/your-username/esp32-sensor-project.git
+   git branch -M main
+   git add .
+   git commit -m "Initial commit"
+   git push -u origin main
+   ```
 
-Alternatively, clone first and then copy your existing project files into this folder.
+---
 
-### 3. Configure PlatformIO
+## Configuration
 
-Open `platformio.ini` to adjust your environments:
+1. **Copy the example file**
 
-```ini
-[env:esp32dev]
-platform = espressif32
-board    = esp32dev
-framework = arduino
+   ```bash
+   cp include/secrets.example.h include/secrets.h
+   ```
+2. **Edit `include/secrets.h`** with your credentials:
 
-[env:ota]
-platform = espressif32
-board    = esp32dev
-framework = arduino
-upload_protocol = espota
-upload_port     = <DEVICE_IP>
-upload_flags    = --auth=${env:OTA_PASSWORD}
-```
+   ```cpp
+   #pragma once
 
-### 4. Add Your Credentials
+   // Wi‑Fi settings
+   #define WIFI_SSID    "your_ssid"
+   #define WIFI_PASS    "your_password"
 
-Create `include/secrets.h` (this file is ignored by Git):
+   // MQTT settings
+   #define MQTT_SERVER  "broker.hivemq.com"
+   #define MQTT_PORT    1883
+   #define MQTT_USER    "mqtt_user"
+   #define MQTT_PASS    "mqtt_pass"
 
-```cpp
-#pragma once
+   // OTA update
+   #define OTA_PASSWORD "ota_update_password"
+   ```
 
-#define WIFI_SSID    "your_ssid"
-#define WIFI_PASS    "your_password"
+Ensure `include/secrets.h` is listed in `.gitignore` to prevent accidental commits.
 
-#define MQTT_SERVER  "broker.hivemq.com"
-#define MQTT_PORT    1883
-#define MQTT_USER    "mqtt_user"
-#define MQTT_PASS    "mqtt_pass"
-
-#define OTA_PASSWORD "ota_update_password"
-```
-
-Ensure `include/secrets.h` is listed in `.gitignore`.
+---
 
 ## Building & Uploading
 
@@ -90,54 +102,72 @@ Ensure `include/secrets.h` is listed in `.gitignore`.
   pio run --environment esp32dev --target upload
   ```
 
-* **OTA Upload** (wireless update):
+* **OTA Upload** (wireless):
 
   ```bash
   pio run --environment ota --target upload
   ```
 
+---
+
 ## Usage
 
-1. After upload, ESP32 will connect to your Wi‑Fi network.
-2. It will connect to the configured MQTT broker.
-3. Sensor readings will be published to topics such as:
+1. After flashing, the ESP32 will connect to your Wi‑Fi network.
+2. It will then connect to the configured MQTT broker.
+3. Sensor readings are published periodically to topics such as:
 
    * `sensors/temperature`
    * `sensors/humidity`
-4. The device listens for OTA update commands on the configured port.
+4. Monitor logs in real time:
 
-Monitor serial output:
+   ```bash
+   pio device monitor --environment esp32dev
+   ```
 
-```bash
-pio device monitor --environment esp32dev
-```
+---
 
-## Directory Structure
+## Project Structure
 
 ```
 ├── include/
-│   └── secrets.h        # Wi‑Fi & MQTT credentials (ignored by Git)
-├── lib/                 # Custom libraries (optional)
+│   ├── secrets.example.h  # Example credentials template
+│   └── secrets.h          # Your private credentials (ignored by Git)
+├── lib/                   # Custom libraries (optional)
 ├── src/
-│   └── main.cpp         # Application entry point
-├── platformio.ini       # PlatformIO configuration
-├── .gitignore           # Ignored files (e.g., .pio, secrets.h)
-└── README.md            # This file
+│   └── main.cpp           # Main application entry point
+│   ├── actuator.cpp/.h    # Actuator control module
+│   ├── network.cpp/.h     # Wi‑Fi & MQTT connectivity module
+│   └── sensor.cpp/.h      # Sensor reading & publishing module
+├── test/                  # Unit tests (PlatformIO/Unity)
+├── platformio.ini         # PlatformIO build configuration
+├── .gitignore             # Files & folders to ignore
+└── README.md              # This file
 ```
 
-## Code Structure in CLion
+---
 
-1. In CLion: **File > Open** and select the project folder.
-2. Install the PlatformIO plugin (if not already).
-3. Use the integrated terminal or VCS menus to run `pio` commands.
-4. Commit and push changes via **Git** menus or the terminal.
+## Testing
+
+PlatformIO’s Unity test framework is supported. To run tests:
+
+```bash
+pio test --environment esp32dev
+```
+
+---
 
 ## Contributing
 
-* Fork this repository and create feature branches.
-* Submit pull requests against `main`.
-* Ensure code formatting and linting are consistent.
+1. Fork the repository
+2. Create a feature branch: `git checkout -b feature/your-feature`
+3. Commit your changes: `git commit -m "feat: add ..."`
+4. Push to your branch: `git push origin feature/your-feature`
+5. Open a Pull Request.
+
+Please adhere to the existing code style and include tests for new features.
+
+---
 
 ## License
 
-This project is licensed under the MIT License. See `LICENSE` for details.
+This project is licensed under the MIT License. See [`LICENSE`](LICENSE) for details.
