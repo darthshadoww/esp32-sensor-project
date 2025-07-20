@@ -1,4 +1,3 @@
-````markdown
 # ESP32 Sensor Project
 
 [![PlatformIO Build Status](https://github.com/darthshadoww/esp32-sensor-project/actions/workflows/ci.yml/badge.svg)](https://github.com/darthshadoww/esp32-sensor-project/actions)  
@@ -178,5 +177,4 @@ Please follow the existing code style and include tests for new features.
 
 This project is licensed under the MIT License. See [LICENSE](LICENSE) for details.
 
-```
 ```
