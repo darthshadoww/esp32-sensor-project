@@ -7,6 +7,13 @@
 
 ---
 
+### System Demonstration  
+The GIF below illustrates how the sensor and servo motor interact in real time:
+
+![Sensor-Servo Demonstration](https://github.com/darthshadoww/esp32-sensor-project/blob/master/Sensor-Servo.gif)
+
+It visually shows how the system mechanism works — the servo reacts based on the sensor’s input, demonstrating the response and synchronization between hardware components.
+
 ## Table of Contents
 
 1. [Features](#features)  
